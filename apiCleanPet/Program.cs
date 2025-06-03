@@ -1,6 +1,8 @@
-using System.Text;
+ï»¿using System.Text;
 using apiCleanPet;
 using apiCleanPet.Models;
+using apiCleanPet.Repositories;
+using apiCleanPet.Repositories.IRepositories;
 using apiCleanPet.Service;
 using apiCleanPet.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Realiza leitura das configurações do token
+// Realiza leitura das configuraÃ§Ãµes do token
 var jwtToken = builder
                 .Configuration
                 .GetSection("JwtTokenConfig");
@@ -18,7 +20,7 @@ builder.Services
 
 var JwtTokenConfig = jwtToken.Get<JwtTokenConfig>();
 
-// Validação do formato de Autenticação
+// ValidaÃ§Ã£o do formato de AutenticaÃ§Ã£o
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
     {
@@ -61,6 +63,9 @@ builder.Services.
 
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<ILoginRepository, LoginRepository>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 
 // Add services to the container.
@@ -76,7 +81,7 @@ builder.Services.AddSwaggerGen(options =>
         Version = "v1"
     });
 
-    // Define o esquema de segurança JWT Bearer
+    // Define o esquema de seguranÃ§a JWT Bearer
     var securityScheme = new Microsoft.OpenApi.Models.OpenApiSecurityScheme
     {
         Name = "Authorization",
