@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 namespace apiCleanPet.Repositories
 {
-    public class ProdutoRepository
+    public class ProdutoRepository : IProdutoRepository
     {
         private readonly AppDbContext _context;
 
@@ -53,6 +53,13 @@ namespace apiCleanPet.Repositories
             _context.Produtos.Remove(produto);
             await _context.SaveChangesAsync();
             return true;
+        }
+
+        public async Task<List<Produto>> BuscarPorNome(string nome)
+        {
+            return await _context.Produtos
+                .Where(p => p.Nome.Contains(nome))
+                .ToListAsync();
         }
     }
 }

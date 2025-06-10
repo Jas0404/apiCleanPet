@@ -78,7 +78,8 @@ builder.Services.AddScoped<IFavoritoRepository, FavoritoRepository>();
 builder.Services.AddScoped<IFavoritoService, FavoritoService>();
 builder.Services.AddScoped<IServicoRepository, ServicoRepository>();
 builder.Services.AddScoped<IServicoService, ServicoService>();
-builder.Services.AddScoped<ProdutoRepository>();
+builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+builder.Services.AddScoped<IProdutoService, ProdutoService>();
 
 
 

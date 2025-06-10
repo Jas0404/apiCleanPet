@@ -1,37 +1,40 @@
 ﻿using apiCleanPet.Models;
-using apiCleanPet.Repositories;
+using apiCleanPet.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
 namespace apiCleanPet.Controllers
 {
     [ApiController]
     [Route("api/produtos")]
     public class ProdutoController : ControllerBase
     {
-        private readonly ProdutoRepository _produtoRepository;
+        private readonly IProdutoService _produtoService;
 
-        public ProdutoController(ProdutoRepository produtoRepository)
+        public ProdutoController(IProdutoService produtoService)
         {
-            _produtoRepository = produtoRepository;
+            _produtoService = produtoService;
         }
 
         [HttpPost]
         public async Task<IActionResult> Cadastrar(Produto produto)
         {
-            await _produtoRepository.CriarAsync(produto);
+            await _produtoService.Adicionar(produto);
             return CreatedAtAction(nameof(ObterPorId), new { id = produto.Id }, produto);
         }
 
         [HttpGet]
         public async Task<ActionResult<List<Produto>>> ListarTodos()
         {
-            var produtos = await _produtoRepository.GetAllAsync();
+            var produtos = await _produtoService.GetAll();
             return Ok(produtos);
         }
 
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Produto>> ObterPorId(int id)
         {
-            var produto = await _produtoRepository.GetByIdAsync(id);
+            var produto = await _produtoService.GetById(id);
             if (produto == null)
                 return NotFound();
 
@@ -41,7 +44,7 @@ namespace apiCleanPet.Controllers
         [HttpGet("filtro/{animal}/{categoria}/{subcategoria}")]
         public async Task<ActionResult<List<Produto>>> ListarPorCategoria(string animal, string categoria, string subcategoria)
         {
-            var produtos = await _produtoRepository.GetPorCategoriaAsync(animal, categoria, subcategoria);
+            var produtos = await _produtoService.GetPorCategoria(animal, categoria, subcategoria);
             return Ok(produtos);
         }
 
@@ -51,7 +54,7 @@ namespace apiCleanPet.Controllers
             if (id != produto.Id)
                 return BadRequest("ID do produto não confere.");
 
-            var atualizado = await _produtoRepository.AtualizarAsync(produto);
+            var atualizado = await _produtoService.Atualizar(produto);
             if (!atualizado)
                 return NotFound();
 
@@ -61,11 +64,21 @@ namespace apiCleanPet.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Excluir(int id)
         {
-            var excluido = await _produtoRepository.ExcluirAsync(id);
+            var excluido = await _produtoService.Remover(id);
             if (!excluido)
                 return NotFound();
 
             return NoContent();
+        }
+
+        [HttpGet("buscar/{nome}")]
+        public async Task<ActionResult<List<Produto>>> BuscarPorNome(string nome)
+        {
+            var produtos = await _produtoService.BuscarPorNome(nome);
+            if (produtos == null || produtos.Count == 0)
+                return NotFound();
+
+            return Ok(produtos);
         }
     }
 }

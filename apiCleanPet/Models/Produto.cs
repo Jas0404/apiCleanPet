@@ -32,5 +32,6 @@ namespace apiCleanPet.Models
         [Required]
         [MaxLength(50)]
         public string Subcategoria { get; set; } = null!;
+        //public List<Favorito> Favoritos { get; set; }
     }
 }
