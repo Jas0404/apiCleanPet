@@ -1,10 +1,14 @@
 ﻿using System.Text;
+using apiCarrinho.Repositories;
 using apiCleanPet;
 using apiCleanPet.Models;
 using apiCleanPet.Repositories;
 using apiCleanPet.Repositories.IRepositories;
 using apiCleanPet.Service;
 using apiCleanPet.Service.Interfaces;
+using apiCleanPet.Services;
+using CadastroPetAPI.Repositories;
+using CadastroPetAPI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -66,6 +70,17 @@ builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IPetService, PetService>();
+builder.Services.AddScoped<IPetRepository, PetRepository>();
+builder.Services.AddScoped<ICarrinhoItemRepository, CarrinhoItemRepository>();
+builder.Services.AddScoped<ICarrinhoItemService, CarrinhoItemService>();
+builder.Services.AddScoped<IFavoritoRepository, FavoritoRepository>();
+builder.Services.AddScoped<IFavoritoService, FavoritoService>();
+builder.Services.AddScoped<IServicoRepository, ServicoRepository>();
+builder.Services.AddScoped<IServicoService, ServicoService>();
+builder.Services.AddScoped<ProdutoRepository>();
+
+
 
 
 // Add services to the container.
