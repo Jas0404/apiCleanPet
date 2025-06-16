@@ -74,13 +74,18 @@ builder.Services.AddScoped<IPetService, PetService>();
 builder.Services.AddScoped<IPetRepository, PetRepository>();
 builder.Services.AddScoped<ICarrinhoItemRepository, CarrinhoItemRepository>();
 builder.Services.AddScoped<ICarrinhoItemService, CarrinhoItemService>();
-builder.Services.AddScoped<IFavoritoRepository, FavoritoRepository>();
-builder.Services.AddScoped<IFavoritoService, FavoritoService>();
+//builder.Services.AddScoped<IFavoritoRepository, FavoritoRepository>();
+//builder.Services.AddScoped<IFavoritoService, FavoritoService>();
 builder.Services.AddScoped<IServicoRepository, ServicoRepository>();
 builder.Services.AddScoped<IServicoService, ServicoService>();
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
-
+builder.Services.AddScoped<IPagamentoRepository, PagamentoRepository>();
+builder.Services.AddScoped<IRecebimentoRepository, RecebimentoRepository>();
+builder.Services.AddScoped<IPagamentoService, PagamentoService>();
+builder.Services.AddScoped<IRecebimentoService, RecebimentoService>();
+builder.Services.AddScoped<IAgendamentoRepository, AgendamentoRepository>();
+builder.Services.AddScoped<IAgendamentoService, AgendamentoService>();
 
 
 
