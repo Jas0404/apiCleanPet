@@ -16,7 +16,6 @@ namespace apiCleanPet
         public DbSet<Favorito> Favoritos { get; set; }
         public DbSet<Servico> Servicos { get; set; }
         public DbSet<Pagamento> Pagamentos { get; set; }
-        public DbSet<Recebimento> Recebimentos { get; set; }
         public DbSet<Agendamento> Agendamentos { get; set; }
         public DbSet<StatusAgendamento> StatusAgendamentos { get; set; }
         public DbSet<AgendamentoServico> AgendamentoServicos { get; set; }
