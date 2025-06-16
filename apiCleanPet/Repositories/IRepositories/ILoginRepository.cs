@@ -7,6 +7,6 @@ namespace apiCleanPet.Repositories.IRepositories
     {
         Task<Usuario> Autenticar(string email, string senha);
         Task<Usuario> BuscarPorEmail(string email);
-        Task AtualizarUsuario(Usuario usuario);
+        Task<bool> AtualizarUsuario(Usuario usuario);
     }
 }
