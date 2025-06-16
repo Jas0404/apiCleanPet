@@ -33,5 +33,25 @@ namespace apiCleanPet.Controllers
                 Login = usuario.Login
             });
         }
+
+        [HttpPost("chave-acesso/solicitar")]
+        public async Task<ActionResult> AutenticarViaChave([FromBody] LoginChaveRequest dados)
+        {
+            var usuario = await _loginService.BuscarPorEmailService(dados.Email);
+            if (usuario == null)
+            {
+                return Unauthorized(new { msg = "E-mail informado não possui cadastro!" });
+            }
+
+            var enviaChaveAcesso = await _loginService.EnviarChaveAcessoPorEmail(dados.Email);
+
+            var token = _loginService.GerarToken(usuario);
+
+            return Ok(new
+            {
+                Token = token,
+                Login = usuario.Login
+            });
+        }
     }
 }

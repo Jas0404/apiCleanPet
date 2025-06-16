@@ -26,10 +26,21 @@ namespace apiCleanPet.Repositories
                 .FirstOrDefaultAsync(u => u.Email == email);
         }
 
-        public async Task AtualizarUsuario(Usuario usuario)
+        public async Task<bool> AtualizarUsuario(Usuario usuario)
         {
             _context.Usuarios.Update(usuario);
             await _context.SaveChangesAsync();
+
+            var usuarioExists = await _context.Usuarios
+                                               .FindAsync(usuario.Id);
+            if (usuarioExists == null)
+            {
+                return false;
+            }
+
+            _context.Entry(usuarioExists).CurrentValues.SetValues(usuario);
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

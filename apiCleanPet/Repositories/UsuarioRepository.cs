@@ -1,4 +1,5 @@
 ﻿using apiCleanPet;
+using Microsoft.EntityFrameworkCore;
 
 public class UsuarioRepository : IUsuarioRepository
 {
@@ -9,11 +10,11 @@ public class UsuarioRepository : IUsuarioRepository
         _context = context;
     }
 
-    public Task<Usuario?> BuscarPorEmailAsync(string email)
+    public async Task<Usuario> BuscarPorEmail(string email)
     {
-        var usuario = _context.Usuarios.FirstOrDefault(u => u.Email == email);
-        return Task.FromResult(usuario);
+        return await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == email);
     }
+
 
     public async Task<Usuario> CriarAsync(Usuario usuario)
     {

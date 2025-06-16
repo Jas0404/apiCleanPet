@@ -52,12 +52,11 @@ namespace apiCleanPet.Service
 
             var chave = new Random().Next(100000, 999999).ToString();
             usuario.ChaveAcesso = chave;
-            //usuario.ChaveAcessoExpiracao = DateTime.UtcNow.AddMinutes(10);
 
             await _loginRepository.AtualizarUsuario(usuario);
 
             string assunto = "Sua chave de acesso";
-            string corpo = $"Olá! Sua chave de acesso é: {chave} \nEla é válida por 10 minutos.";
+            string corpo = $"Olá! Sua chave de acesso é: {chave}.";
 
             await _emailService.EnviarEmailAsync(email, assunto, corpo);
 
