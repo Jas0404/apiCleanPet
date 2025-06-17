@@ -20,5 +20,10 @@ namespace apiCleanPet.Models
 
         [Column("Preco", TypeName = "decimal(10,2)")]
         public decimal? Preco { get; set; }
+
+        [Required]
+        [Column("imagem")]
+        [StringLength(1000)]
+        public string Imagem { get; set; }
     }
 }

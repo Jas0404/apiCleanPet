@@ -9,5 +9,5 @@
     public string Senha { get; set; }
     public string ChaveAcesso { get; set; } = string.Empty;
     public string Login { get; set; }
-    public List<Favorito> Favoritos { get; set; }
+    //public List<Favorito> Favoritos { get; set; }
 }

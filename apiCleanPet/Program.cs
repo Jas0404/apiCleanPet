@@ -14,6 +14,18 @@ using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Adiciona política CORS liberada
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsLivre", policy =>
+    {
+        policy
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
 // Realiza leitura das configurações do token
 var jwtToken = builder
                 .Configuration
@@ -132,6 +144,9 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
+
+// Ativa o CORS no pipeline
+app.UseCors("CorsLivre");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
