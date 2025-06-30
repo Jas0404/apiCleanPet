@@ -31,9 +31,15 @@ namespace apiCarrinho.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CarrinhoItem>> Post([FromBody] CarrinhoItem item)
+        public async Task<ActionResult<CarrinhoItem>> Post([FromBody] CarrinhoItemInput item)
         {
-            var novo = await _service.Adicionar(item);
+            CarrinhoItem carrinhoItem = new CarrinhoItem
+            {
+                UsuarioId = item.UsuarioId,
+                ProdutoId = item.ProdutoId,
+                Quantidade = item.Quantidade ?? 1,
+            };
+            var novo = await _service.Adicionar(carrinhoItem);
             return CreatedAtAction(nameof(GetItem), new { id = novo.Id }, novo);
         }
 
