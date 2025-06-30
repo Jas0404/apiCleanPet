@@ -8,7 +8,8 @@ namespace apiCleanPet.Repositories
     {
         Task<List<Produto>> GetAllAsync();
         Task<Produto?> GetByIdAsync(int id);
-        Task<List<Produto>> GetPorCategoriaAsync(string animal, string categoria, string subcategoria);
+        Task<List<Produto>> GetPorCategoriaAsync(string categoria);
+        Task<List<Produto>> GetPorSubCategoriaAsync(string categoria, string subcategoria);
         Task CriarAsync(Produto produto);
         Task<bool> AtualizarAsync(Produto produto);
         Task<bool> ExcluirAsync(int id);

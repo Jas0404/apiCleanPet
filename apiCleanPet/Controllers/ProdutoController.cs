@@ -41,10 +41,17 @@ namespace apiCleanPet.Controllers
             return Ok(produto);
         }
 
-        [HttpGet("filtro/{animal}/{categoria}/{subcategoria}")]
-        public async Task<ActionResult<List<Produto>>> ListarPorCategoria(string animal, string categoria, string subcategoria)
+        [HttpGet("filtro{categoria}/{subcategoria}")]
+        public async Task<ActionResult<List<Produto>>> ListarPorSubCategoria(string categoria , string subcategoria)
         {
-            var produtos = await _produtoService.GetPorCategoria(animal, categoria, subcategoria);
+            var produtos = await _produtoService.GetPorSubCategoria(categoria, subcategoria);
+            return Ok(produtos);
+        }
+
+        [HttpGet("filtro/{categoria}")]
+        public async Task<ActionResult<List<Produto>>> ListarPorCategoria(string categoria)
+        {
+            var produtos = await _produtoService.GetPorCategoria(categoria);
             return Ok(produtos);
         }
 

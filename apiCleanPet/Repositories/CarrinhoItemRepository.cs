@@ -17,6 +17,7 @@ namespace apiCarrinho.Repositories
         public async Task<List<CarrinhoItem>> GetCarrinhoPorUsuario(int usuarioId)
         {
             return await _context.CarrinhoItens
+                .Include(i => i.Produto)
                 .Where(i => i.UsuarioId == usuarioId)
                 .ToListAsync();
         }
@@ -53,5 +54,12 @@ namespace apiCarrinho.Repositories
             await _context.SaveChangesAsync();
             return true;
         }
+
+        public async Task<CarrinhoItem> GetPorUsuarioEProduto(int usuarioId, int produtoId)
+        {
+            return await _context.CarrinhoItens
+                .FirstOrDefaultAsync(c => c.UsuarioId == usuarioId && c.ProdutoId == produtoId);
+        }
+
     }
 }

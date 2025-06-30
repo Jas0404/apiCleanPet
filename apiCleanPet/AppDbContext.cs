@@ -19,6 +19,7 @@ namespace apiCleanPet
         public DbSet<Agendamento> Agendamentos { get; set; }
         public DbSet<StatusAgendamento> StatusAgendamentos { get; set; }
         public DbSet<AgendamentoServico> AgendamentoServicos { get; set; }
+        public DbSet<Categoria> Categorias { get; set; }
 
 
     }

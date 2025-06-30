@@ -15,7 +15,7 @@ namespace apiCarrinho.Controllers
             _service = service;
         }
 
-        [HttpGet("{usuarioId}")]
+        [HttpGet("usuario/{usuarioId}")]
         public async Task<ActionResult<IEnumerable<CarrinhoItem>>> GetCarrinho(int usuarioId)
         {
             var itens = await _service.GetCarrinho(usuarioId);

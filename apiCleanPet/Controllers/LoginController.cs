@@ -29,8 +29,9 @@ namespace apiCleanPet.Controllers
 
             return Ok(new
             {
-                Token = token,
-                Login = usuario.Login
+                token = token,
+                id = usuario.Id,
+                login = usuario.Login
             });
         }
 

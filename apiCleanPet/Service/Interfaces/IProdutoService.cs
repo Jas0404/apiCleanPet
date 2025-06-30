@@ -8,7 +8,8 @@ namespace apiCleanPet.Services
     {
         Task<List<Produto>> GetAll();
         Task<Produto?> GetById(int id);
-        Task<List<Produto>> GetPorCategoria(string animal, string categoria, string subcategoria);
+        Task<List<Produto>> GetPorCategoria(string categoria);
+        Task<List<Produto>> GetPorSubCategoria(string categoria, string subcategoria);
         Task<Produto> Adicionar(Produto produto);
         Task<bool> Atualizar(Produto produto);
         Task<bool> Remover(int id);

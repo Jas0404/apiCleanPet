@@ -21,10 +21,17 @@ namespace apiCleanPet.Repositories
             return await _context.Produtos.FindAsync(id);
         }
 
-        public async Task<List<Produto>> GetPorCategoriaAsync(string animal, string categoria, string subcategoria)
+        public async Task<List<Produto>> GetPorCategoriaAsync(string categoria)
         {
             return await _context.Produtos
-                .Where(p => p.Animal == animal && p.Categoria == categoria && p.Subcategoria == subcategoria)
+                .Where(p => p.Categoria == categoria)
+                .ToListAsync();
+        }
+
+        public async Task<List<Produto>> GetPorSubCategoriaAsync(string categoria, string subcategoria)
+        {
+            return await _context.Produtos
+                .Where(p => p.Categoria == categoria && p.Subcategoria == subcategoria)
                 .ToListAsync();
         }
 

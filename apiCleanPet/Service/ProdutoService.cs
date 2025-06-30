@@ -24,9 +24,14 @@ namespace apiCleanPet.Services
             return await _repository.GetByIdAsync(id);
         }
 
-        public async Task<List<Produto>> GetPorCategoria(string animal, string categoria, string subcategoria)
+        public async Task<List<Produto>> GetPorCategoria(string categoria)
         {
-            return await _repository.GetPorCategoriaAsync(animal, categoria, subcategoria);
+            return await _repository.GetPorCategoriaAsync(categoria);
+        }
+
+        public async Task<List<Produto>> GetPorSubCategoria( string categoria, string subcategoria)
+        {
+            return await _repository.GetPorSubCategoriaAsync( categoria, subcategoria);
         }
 
         public async Task<Produto> Adicionar(Produto produto)

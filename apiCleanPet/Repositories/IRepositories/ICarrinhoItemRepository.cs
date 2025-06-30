@@ -9,5 +9,6 @@ namespace apiCleanPet.Repositories
         Task<CarrinhoItem> Adicionar(CarrinhoItem item);
         Task<bool> Atualizar(CarrinhoItem item);
         Task<bool> Remover(int id);
+        Task<CarrinhoItem> GetPorUsuarioEProduto(int usuarioId, int produtoId);
     }
 }
